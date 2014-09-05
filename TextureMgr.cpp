@@ -25,6 +25,34 @@ void TextureMgr::Init(SDL_Renderer* ren)
 	m_mainRenderer = ren;
 }
 
+void TextureMgr::GetTextureDimension(std::string ImageId, int* w, int* h)
+{
+	if( m_mapTexture.find(ImageId) == m_mapTexture.end()) {
+		return ;
+	}
+	SDL_Texture* tex = 0;
+	tex =m_mapTexture.find(ImageId)->second;
+	if( tex == 0 ) {
+		return ;
+	}
+	Uint32 format = 0;
+	int access = 0;
+
+	SDL_QueryTexture(tex, &format, &access, w, h); 
+}
+
+void TextureMgr::Draw(std::string ImageID, SDL_Rect* srcRect, SDL_Rect* desRect, bool isScaled)
+{
+	if( m_mapTexture.find(ImageID) == m_mapTexture.end()) {
+		return ;
+	}
+	SDL_Texture* tex = m_mapTexture.find(ImageID)->second;
+	if ( tex == 0) {
+		return ;
+	}
+	SDL_RenderCopy(m_mainRenderer, tex, srcRect, desRect);
+}
+
 void TextureMgr::LoadImage(const char* filename, std::string ImageID)
 {
 	if(m_mapTexture.find(ImageID) != m_mapTexture.end()) {
@@ -46,4 +74,5 @@ void TextureMgr::LoadImage(const char* filename, std::string ImageID)
 	m_mapTexture.insert(std::pair<std::string, SDL_Texture*>(ImageID, tex));
 	Log outlog("output.log");
 	outlog.write("GFD", "Insert 1");
+	SDL_FreeSurface(surf);
 }

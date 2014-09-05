@@ -11,6 +11,7 @@ class Game
 	public:
 		void Init(const char* title, int x, int y, int w, int h, Uint32 flags);
 		SDL_Renderer* GetMainRenderer();
+		SDL_Window* GetMainWindow();
 		void Run();
 		virtual void Frame();
 		virtual void LoadResource();

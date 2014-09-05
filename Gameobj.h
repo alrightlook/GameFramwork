@@ -9,6 +9,7 @@ class Gameobj :public Game
 		Gameobj();
 		~Gameobj();
 	public:
+		void Frame();
 		void LoadResource();
 };
 #endif
