@@ -1,6 +1,7 @@
 #include "Gameobj.h"
 #include <iostream>
 #include "TextureMgr.h"
+#include "MapEngine.h"
 
 Gameobj::Gameobj()
 {
@@ -8,16 +9,22 @@ Gameobj::Gameobj()
 
 Gameobj::~Gameobj()
 {
+
+}
+void Gameobj::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
+{
+	Game::Init(title, x, y, w, h, flags);
+	MapEngine::Instance()->GenerateMap(15,10);
+	MapEngine::Instance()->DumpToDisk("Map.txt");
 }
 
 void Gameobj::Frame()
 {
 	SDL_SetRenderDrawColor(GetMainRenderer(), 123,32,11, 255);
-	SDL_RenderClear(GetMainRenderer());
-	int w = 0;
-	int h = 0;
-	TextureMgr::Instance()->Draw("pic", 10,10 );
+	ClearRenderer();
+	TextureMgr::Instance()->Draw("pic", 15,10 );
 	SDL_RenderPresent(GetMainRenderer());
+	PostRepaint(false);
 }
 void Gameobj::LoadResource()
 {

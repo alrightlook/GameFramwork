@@ -5,8 +5,14 @@
 Game::Game()
 {
 	m_bQuit = false;
+	m_bRepaint = true;
 	m_MainWindow = 0;
 	m_MainRender = 0;
+}
+
+void Game::PostRepaint(bool repaint)
+{
+	m_bRepaint = repaint;
 }
 
 Game::~Game()
@@ -49,10 +55,10 @@ void Game::LoadResource()
 
 void Game::Frame()
 {
-	SDL_SetRenderDrawColor(m_MainRender, 0,0,0,255);
+}
+void Game::ClearRenderer()
+{
 	SDL_RenderClear(m_MainRender);
-	SDL_RenderPresent(m_MainRender);
-
 }
 void Game::QuitGame()
 {
@@ -77,7 +83,9 @@ void Game::Run()
 			KeyDown(&e);
 		}
 		else {
-			Frame();
+			if(m_bRepaint) {
+				Frame();
+			}
 		}
 	}
 }

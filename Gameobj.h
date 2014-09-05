@@ -9,6 +9,7 @@ class Gameobj :public Game
 		Gameobj();
 		~Gameobj();
 	public:
+		virtual void Init(const char * title, int x, int y , int w, int h, Uint32 flags);
 		void Frame();
 		void KeyDown(SDL_Event* event);
 		void LoadResource();
