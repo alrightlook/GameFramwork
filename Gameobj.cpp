@@ -16,13 +16,7 @@ void Gameobj::Frame()
 	SDL_RenderClear(GetMainRenderer());
 	int w = 0;
 	int h = 0;
-	TextureMgr::Instance()->GetTextureDimension("pic", &w, &h);
-	SDL_Rect rect;
-	rect.x = 0;
-	rect.y = 0; 
-	rect.w = w;
-	rect.h = h;
-	TextureMgr::Instance()->Draw("pic", 0, &rect);
+	TextureMgr::Instance()->Draw("pic", 10,10 );
 	SDL_RenderPresent(GetMainRenderer());
 }
 void Gameobj::LoadResource()
