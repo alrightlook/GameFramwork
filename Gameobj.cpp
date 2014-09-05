@@ -14,7 +14,8 @@ Gameobj::~Gameobj()
 void Gameobj::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
 {
 	Game::Init(title, x, y, w, h, flags);
-	MapEngine::Instance()->GenerateMap(15,10);
+	MapEngine::Instance()->GenerateMap(50,40);
+	MapEngine::Instance()->GenerateRoom(10, 10, 4, 4, 25);
 	MapEngine::Instance()->DumpToDisk("Map.txt");
 }
 

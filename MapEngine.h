@@ -8,6 +8,7 @@ class MapEngine
 		static MapEngine* Instance();
 		void GenerateMap(int w, int h);
 		void DumpToDisk(const char* filename);
+		void GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minHeight, int count);
 	private:
 		int** m_theMap;
 		int m_nWidth;
