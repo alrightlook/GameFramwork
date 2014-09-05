@@ -13,8 +13,10 @@ class Game
 		SDL_Renderer* GetMainRenderer();
 		SDL_Window* GetMainWindow();
 		void Run();
+		void QuitGame();
 		virtual void Frame();
 		virtual void LoadResource();
+		virtual void KeyDown(SDL_Event* event);
 		
 	private:
 		bool m_bQuit;

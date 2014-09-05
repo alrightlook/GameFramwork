@@ -24,3 +24,13 @@ void Gameobj::LoadResource()
 	TextureMgr::Instance()->Init(GetMainRenderer());
 	TextureMgr::Instance()->LoadImage("pic.png", "pic");
 }
+
+void Gameobj::KeyDown(SDL_Event* event)
+{
+	if( event == 0) {
+		return ;
+	}
+	if( event->key.keysym.sym == SDLK_ESCAPE) {
+		QuitGame();
+	}
+}

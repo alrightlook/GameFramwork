@@ -10,6 +10,7 @@ class Gameobj :public Game
 		~Gameobj();
 	public:
 		void Frame();
+		void KeyDown(SDL_Event* event);
 		void LoadResource();
 };
 #endif

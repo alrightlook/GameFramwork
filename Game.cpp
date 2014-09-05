@@ -54,6 +54,15 @@ void Game::Frame()
 	SDL_RenderPresent(m_MainRender);
 
 }
+void Game::QuitGame()
+{
+	m_bQuit = true;
+}
+
+void Game::KeyDown(SDL_Event* event)
+{
+}
+
 void Game::Run()
 {
 	SDL_Event e;
@@ -63,6 +72,9 @@ void Game::Run()
 			if( e.type == SDL_QUIT) {
 				m_bQuit = true;
 			}
+		}
+		else if(e.type == SDL_KEYDOWN) {
+			KeyDown(&e);
 		}
 		else {
 			Frame();
