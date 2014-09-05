@@ -16,6 +16,11 @@ Game::~Game()
 	SDL_Quit();
 }
 
+SDL_Renderer* Game::GetMainRenderer()
+{
+	return m_MainRender;
+}
+
 void Game::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
 {
 	if( SDL_Init(SDL_INIT_EVERYTHING) < 0) {
