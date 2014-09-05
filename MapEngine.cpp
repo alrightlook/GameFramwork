@@ -77,15 +77,41 @@ void MapEngine::GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minH
 		width = rand() % dw + minWidth;
 		height = rand() % dh + minHeight;
 		if ( posx + width < m_nWidth && posy + height < m_nHeight && CheckOverlap(posx, posy, width, height)) {
+			int door = 0;
 			for(int i = posy; i < posy + height; i++)
 			{
-				m_theMap[i][posx] = 1;
-				m_theMap[i][posx+width] = 1;
+				if( rand() % height == 0 && door < 2) {
+					m_theMap[i][posx] = 2;
+					door++;
+				}
+				else {
+					m_theMap[i][posx] = 1;
+				}
+				
+				if( rand() % height == 0 && door <2) {
+					m_theMap[i][posx+width] = 2;
+					door++;
+				}
+				else {
+					m_theMap[i][posx+width] = 1;
+				}
 			}
 			for(int i = posx; i < posx + width; i++)
 			{
-				m_theMap[posy][i] = 1;
-				m_theMap[posy+ height][i] = 1;
+				if(rand() % width ==0 && door <2 ) {
+					m_theMap[posy][i] = 2;
+					door++;
+				}
+				else {
+					m_theMap[posy][i] = 1;
+				}
+				if (rand() % width == 0 && door < 2) {
+					m_theMap[posy+ height][i] = 2;
+					door++;
+				}
+				else {
+					m_theMap[posy+ height][i] = 1;
+				}
 			}
 			m_theMap[posy + height][ posx + width] = 1;
 			index++;
