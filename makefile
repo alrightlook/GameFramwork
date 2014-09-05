@@ -1,5 +1,5 @@
-GameFrameWorkDemo:main.o Game.o Gameobj.o TextureMgr.o
-	g++ -g -o GameFrameWorkDemo Gameobj.o Game.o TextureMgr.o main.o -lSDL2main -lmingw32 -lSDL2
+GameFrameWorkDemo:main.o Game.o TextureMgr.o Gameobj.o
+	g++ -g -o GameFrameWorkDemo Game.o Gameobj.o TextureMgr.o main.o -lSDL2main -lmingw32 -lSDL2
 main.o:main.cpp
 	g++ -g -c main.cpp
 Gameobj.o:Gameobj.cpp
