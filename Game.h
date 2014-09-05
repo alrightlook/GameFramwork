@@ -12,6 +12,7 @@ class Game
 		void Init(const char* title, int x, int y, int w, int h, Uint32 flags);
 		void Run();
 		virtual void Frame();
+		virtual void LoadResource();
 		
 	private:
 		bool m_bQuit;

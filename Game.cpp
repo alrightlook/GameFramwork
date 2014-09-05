@@ -32,6 +32,11 @@ void Game::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
 	}
 }
 
+void Game::LoadResource()
+{
+
+}
+
 void Game::Frame()
 {
 	SDL_SetRenderDrawColor(m_MainRender, 0,0,0,255);
