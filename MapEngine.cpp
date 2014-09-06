@@ -77,41 +77,15 @@ void MapEngine::GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minH
 		width = rand() % dw + minWidth;
 		height = rand() % dh + minHeight;
 		if ( posx + width < m_nWidth && posy + height < m_nHeight && CheckOverlap(posx, posy, width, height)) {
-			int door = 0;
 			for(int i = posy; i < posy + height; i++)
 			{
-				if( rand() % height == 0 && door < 2) {
-					m_theMap[i][posx] = 2;
-					door++;
-				}
-				else {
-					m_theMap[i][posx] = 1;
-				}
-				
-				if( rand() % height == 0 && door <2) {
-					m_theMap[i][posx+width] = 2;
-					door++;
-				}
-				else {
-					m_theMap[i][posx+width] = 1;
-				}
+				m_theMap[i][posx] = 1;
+				m_theMap[i][posx+width] = 1;
 			}
 			for(int i = posx; i < posx + width; i++)
 			{
-				if(rand() % width ==0 && door <2 ) {
-					m_theMap[posy][i] = 2;
-					door++;
-				}
-				else {
-					m_theMap[posy][i] = 1;
-				}
-				if (rand() % width == 0 && door < 2) {
-					m_theMap[posy+ height][i] = 2;
-					door++;
-				}
-				else {
-					m_theMap[posy+ height][i] = 1;
-				}
+				m_theMap[posy][i] = 1;
+				m_theMap[posy+ height][i] = 1;
 			}
 			m_theMap[posy + height][ posx + width] = 1;
 			index++;
@@ -119,6 +93,7 @@ void MapEngine::GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minH
 			count--;
 		}
 	}
+	CreateDoors();
 }
 
 bool MapEngine::CheckOverlap(int posx, int posy, int width, int height)
@@ -153,6 +128,96 @@ bool MapEngine::CheckOverlap(int posx, int posy, int width, int height)
 	return false;
 
 }
+void MapEngine::CreateDoors()
+{
+	int numDoors = 2;
+	srand(time(0));
+	std::map<int, Room>::iterator it;
+	for(it = m_mapRoom.begin(); it != m_mapRoom.end(); it++)
+	{
+		it->second.doors = numDoors;
+		int currDoor = 0;
+		int direction = 0;
+		int doorx = 0;
+		int doory = 0;
+		Door door;
+		while( currDoor != numDoors)
+		{
+			direction = rand() % 4;	
+			if( it->second.mapDoor.find(direction) == it->second.mapDoor.end())
+			{
+				switch(direction)
+				{
+					case 0:
+							if(it->second.posy == 0 ) {
+								continue;
+							}
+							do
+							{
+								doorx = rand() % it->second.width;
+								door.posx = it->second.posx + doorx;
+								door.posy = it->second.posy;
+							} while( doorx == 0);
+							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
+							m_theMap[door.posy][door.posx] = 2;
+							currDoor++;
+						
+						break;
+					case 1:
+						
+							if(it->second.posx + it->second.width == m_nWidth)
+							{
+								continue;
+							}
+							do
+							{
+								doory = rand() % it->second.height;
+								door.posx = it->second.posx;
+								door.posy = it->second.posy + doory;
+							}
+							while(doory == 0);
+							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
+							m_theMap[door.posy][door.posx] = 2;
+							currDoor++;
+						
+						break;
+					case 2:
+							if(it->second.posy + it->second.height == m_nHeight)
+							{
+								continue;
+							}
+							do
+							{
+								doorx = rand() % it->second.width;
+								door.posx = it->second.posx + doorx;
+								door.posy = it->second.posy;
+
+							}
+							while (doorx == 0);
+							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
+							m_theMap[door.posy][door.posx] = 2;
+							currDoor++;
+						break;
+					case 3:
+							if(it->second.posx == 0) {
+								continue;
+							}
+							do
+							{
+								doory = rand() % it->second.height;
+								door.posx = it->second.posx;
+								door.posy = it->second.posy + doory;
+							}
+							while(doory == 0);
+							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
+							m_theMap[door.posy][door.posx] = 2;
+							currDoor++;
+						break;
+				}
+			}
+		}
+	}
+}
 void MapEngine::AddRoom(int index,int posx, int posy, int width, int height)
 {
 	Room room;
@@ -160,6 +225,7 @@ void MapEngine::AddRoom(int index,int posx, int posy, int width, int height)
 	room.posy = posy;
 	room.width = width;
 	room.height = height;
+	room.doors = 0;
 
 	m_mapRoom.insert(std::pair<int, Room>(index, room));
 

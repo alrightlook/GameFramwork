@@ -1,12 +1,19 @@
 #ifndef MAPENGINE_HEADER
 #define MAPENGINE_HEADER
 #include <map>
+struct Door
+{
+	int posx;
+	int posy;
+};
 struct Room
 {
 	int posx;
 	int posy;
 	int width;
 	int height;
+	int doors;
+	std::map<int, Door> mapDoor;
 };
 
 class MapEngine
@@ -18,6 +25,7 @@ class MapEngine
 		void DumpToDisk(const char* filename);
 		void GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minHeight, int count);
 	private:
+		void CreateDoors();
 		void AddRoom(int index,int posx, int posy, int width, int height);
 		bool CheckOverlap(int posx, int posy,int width, int height);
 		std::map<int, Room> m_mapRoom;	
