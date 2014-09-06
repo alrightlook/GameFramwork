@@ -1,5 +1,7 @@
-GameFrameWorkDemo:main.o Game.o TextureMgr.o log.o MapEngine.o Gameobj.o
-	g++ -g -o GameFrameWorkDemo log.o MapEngine.o Game.o Gameobj.o TextureMgr.o main.o -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+GameFrameWorkDemo:main.o Player.o Game.o TextureMgr.o log.o MapEngine.o Gameobj.o
+	g++ -g -o GameFrameWorkDemo log.o Player.o MapEngine.o Game.o Gameobj.o TextureMgr.o main.o -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+Player.o:Player.cpp
+	g++ -g -c Player.cpp
 log.o:log.cpp
 	g++ -g -c log.cpp
 main.o:main.cpp

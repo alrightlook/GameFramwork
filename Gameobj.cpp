@@ -2,6 +2,7 @@
 #include <iostream>
 #include "TextureMgr.h"
 #include "MapEngine.h"
+#include "Player.h"
 
 Gameobj::Gameobj()
 {
@@ -16,6 +17,8 @@ void Gameobj::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
 	Game::Init(title, x, y, w, h, flags);
 	MapEngine::Instance()->GenerateMap(70,70);
 	MapEngine::Instance()->GenerateRoom(15, 15, 4, 4, 50);
+	Player::Instance()->GeneratePlayer();
+	
 	MapEngine::Instance()->DumpToDisk("Map.txt");
 }
 

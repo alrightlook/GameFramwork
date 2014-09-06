@@ -1,6 +1,11 @@
 #ifndef MAPENGINE_HEADER
 #define MAPENGINE_HEADER
 #include <map>
+
+#define ROAD 0
+#define WALL 1
+#define DOOR 2
+#define PLAYER 3
 struct Door
 {
 	int posx;
@@ -24,6 +29,9 @@ class MapEngine
 		void GenerateMap(int w, int h);
 		void DumpToDisk(const char* filename);
 		void GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minHeight, int count);
+		void GetTile(int x, int y, int* tile);
+		void SetTile(int x, int y, int tile);
+		void QuerySpace(int* x, int* y);
 	private:
 		void CreateDoors();
 		void AddRoom(int index,int posx, int posy, int width, int height);

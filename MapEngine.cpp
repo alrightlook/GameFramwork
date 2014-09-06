@@ -8,6 +8,29 @@
 using namespace std;
 MapEngine* MapEngine::m_Instance = 0;
 
+void MapEngine::GetTile(int x, int y, int* tile)
+{
+	*tile = m_theMap[y][x];
+}
+void MapEngine::SetTile(int x, int y, int tile)
+{
+	m_theMap[y][x] = tile;
+}
+void MapEngine::QuerySpace(int* x, int* y)
+{
+	srand(time(0));
+	int px = 0;
+	int py = 0;
+	do
+	{
+		px = rand() % m_nWidth;
+		py = rand() % m_nHeight;
+	}
+	while(m_theMap[py][px] == 0);
+	std::cout<<"The QuerySpace called"<<px<<" "<<py<<std::endl;
+	*x = px;
+	*y = py;
+}
 void MapEngine::GenerateMap(int w, int h)
 {
 	//--------------------------------------------> x width
@@ -160,6 +183,9 @@ void MapEngine::CreateDoors()
 							} while( doorx == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
 							m_theMap[door.posy][door.posx] = 2;
+							if(m_theMap[door.posy -1][door.posx] == 1) {
+								m_theMap[door.posy -1][door.posx] == 2;
+							}
 							currDoor++;
 						
 						break;
@@ -177,6 +203,9 @@ void MapEngine::CreateDoors()
 							}
 							while(doory == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
+							if(m_theMap[door.posy -1 ][door.posx ] == 1) {
+								m_theMap[door.posy -1][door.posx] == 2;
+							}
 							m_theMap[door.posy][door.posx] = 2;
 							currDoor++;
 						
@@ -196,6 +225,9 @@ void MapEngine::CreateDoors()
 							while (doorx == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
 							m_theMap[door.posy][door.posx] = 2;
+							if(m_theMap[door.posy +1][door.posx] == 1) {
+								m_theMap[door.posy +1][door.posx] == 2;
+							}
 							currDoor++;
 						break;
 					case 3:
@@ -211,6 +243,9 @@ void MapEngine::CreateDoors()
 							while(doory == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
 							m_theMap[door.posy][door.posx] = 2;
+							if(m_theMap[door.posy ][door.posx -1] == 1) {
+								m_theMap[door.posy ][door.posx-1] == 2;
+							}
 							currDoor++;
 						break;
 				}
