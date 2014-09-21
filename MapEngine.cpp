@@ -27,7 +27,6 @@ void MapEngine::QuerySpace(int* x, int* y)
 		py = rand() % m_nHeight;
 	}
 	while(m_theMap[py][px] == 0);
-	std::cout<<"The QuerySpace called"<<px<<" "<<py<<std::endl;
 	*x = px;
 	*y = py;
 }
