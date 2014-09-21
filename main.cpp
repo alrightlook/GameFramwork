@@ -6,7 +6,7 @@
 int main(int argc, char* argv[])
 {
 	Gameobj game;
-	game.Init("Hello GameFrameWork Demo", 100,100, 640,480, SDL_RENDERER_ACCELERATED);
+	game.Init("Hello GameFrameWork Demo", 100,100, 640,480, SDL_RENDERER_ACCELERATED| SDL_WINDOW_FULLSCREEN);
 	game.LoadResource();
 	game.Run();
 	return 0;
