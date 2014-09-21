@@ -1,8 +1,11 @@
 #include "Gameobj.h"
+#include "Thread.h"
 #include <iostream>
 #include "TextureMgr.h"
 #include "MapEngine.h"
 #include "Player.h"
+
+using namespace std;
 
 Gameobj::Gameobj()
 {
@@ -11,6 +14,14 @@ Gameobj::Gameobj()
 Gameobj::~Gameobj()
 {
 
+}
+int Count(void* data)
+{
+	for(int i = 0; i <100; i++)
+	{
+		cout<<i<<endl;
+		SDL_Delay(50);
+	}
 }
 void Gameobj::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
 {
@@ -34,6 +45,9 @@ void Gameobj::LoadResource()
 {
 	TextureMgr::Instance()->Init(GetMainRenderer());
 	TextureMgr::Instance()->LoadImage("pic.png", "pic");
+
+	Thread countThread;// = new Thread();
+	countThread.CreateRunable(Count);
 }
 
 void Gameobj::KeyDown(SDL_Event* event)
