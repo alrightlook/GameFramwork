@@ -5,7 +5,7 @@
 #define ROAD 0
 #define WALL 1
 #define DOOR 2
-#define PLAYER 3
+#define PLAYER 4
 struct Door
 {
 	int posx;

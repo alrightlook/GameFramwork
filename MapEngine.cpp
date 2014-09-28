@@ -101,15 +101,15 @@ void MapEngine::GenerateRoom(int maxWidth, int maxHeight, int minWidth, int minH
 		if ( posx + width < m_nWidth && posy + height < m_nHeight && CheckOverlap(posx, posy, width, height)) {
 			for(int i = posy; i < posy + height; i++)
 			{
-				m_theMap[i][posx] = 1;
-				m_theMap[i][posx+width] = 1;
+				m_theMap[i][posx] = WALL;
+				m_theMap[i][posx+width] = WALL;
 			}
 			for(int i = posx; i < posx + width; i++)
 			{
-				m_theMap[posy][i] = 1;
-				m_theMap[posy+ height][i] = 1;
+				m_theMap[posy][i] = WALL;
+				m_theMap[posy+ height][i] = WALL;
 			}
-			m_theMap[posy + height][ posx + width] = 1;
+			m_theMap[posy + height][ posx + width] = WALL;
 			index++;
 			AddRoom(index, posx, posy, width, height);
 			count--;
@@ -181,9 +181,9 @@ void MapEngine::CreateDoors()
 								door.posy = it->second.posy;
 							} while( doorx == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
-							m_theMap[door.posy][door.posx] = 2;
+							m_theMap[door.posy][door.posx] = DOOR;
 							if(m_theMap[door.posy -1][door.posx] == 1) {
-								m_theMap[door.posy -1][door.posx] == 2;
+								m_theMap[door.posy -1][door.posx] == DOOR;
 							}
 							currDoor++;
 						
@@ -203,9 +203,9 @@ void MapEngine::CreateDoors()
 							while(doory == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
 							if(m_theMap[door.posy -1 ][door.posx ] == 1) {
-								m_theMap[door.posy -1][door.posx] == 2;
+								m_theMap[door.posy -1][door.posx] == DOOR;
 							}
-							m_theMap[door.posy][door.posx] = 2;
+							m_theMap[door.posy][door.posx] = DOOR;
 							currDoor++;
 						
 						break;
@@ -223,9 +223,9 @@ void MapEngine::CreateDoors()
 							}
 							while (doorx == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
-							m_theMap[door.posy][door.posx] = 2;
+							m_theMap[door.posy][door.posx] = DOOR;
 							if(m_theMap[door.posy +1][door.posx] == 1) {
-								m_theMap[door.posy +1][door.posx] == 2;
+								m_theMap[door.posy +1][door.posx] == DOOR;
 							}
 							currDoor++;
 						break;
@@ -241,9 +241,9 @@ void MapEngine::CreateDoors()
 							}
 							while(doory == 0);
 							it->second.mapDoor.insert(std::pair<int, Door>(direction, door));
-							m_theMap[door.posy][door.posx] = 2;
+							m_theMap[door.posy][door.posx] = DOOR;
 							if(m_theMap[door.posy ][door.posx -1] == 1) {
-								m_theMap[door.posy ][door.posx-1] == 2;
+								m_theMap[door.posy ][door.posx-1] == DOOR;
 							}
 							currDoor++;
 						break;

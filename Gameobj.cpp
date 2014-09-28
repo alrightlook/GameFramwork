@@ -46,8 +46,8 @@ void Gameobj::LoadResource()
 	TextureMgr::Instance()->Init(GetMainRenderer());
 	TextureMgr::Instance()->LoadImage("pic.png", "pic");
 
-	Thread countThread;// = new Thread();
-	countThread.CreateRunable(Count);
+//	Thread countThread;// = new Thread();
+//	countThread.CreateRunable(Count);
 }
 
 void Gameobj::KeyDown(SDL_Event* event)
