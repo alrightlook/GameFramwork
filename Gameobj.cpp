@@ -35,7 +35,7 @@ void Gameobj::Init(const char* title, int x, int y, int w, int h, Uint32 flags)
 
 void Gameobj::Frame()
 {
-	SDL_SetRenderDrawColor(GetMainRenderer(), 123,32,11, 255);
+//	SDL_SetRenderDrawColor(GetMainRenderer(), 123,32,11, 255);
 	ClearRenderer();
 	TextureMgr::Instance()->Draw("pic", 15,10 );
 	SDL_RenderPresent(GetMainRenderer());
@@ -43,8 +43,8 @@ void Gameobj::Frame()
 }
 void Gameobj::LoadResource()
 {
-	TextureMgr::Instance()->Init(GetMainRenderer());
-	TextureMgr::Instance()->LoadImage("pic.png", "pic");
+//	TextureMgr::Instance()->Init(GetMainRenderer());
+//	TextureMgr::Instance()->LoadImage("pic.png", "pic");
 
 //	Thread countThread;// = new Thread();
 //	countThread.CreateRunable(Count);
